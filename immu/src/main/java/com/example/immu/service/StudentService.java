@@ -25,6 +25,7 @@ public class StudentService {
 
     //Kun StudentService olio luodaan springiin, niin haetaan studentti tiedot filestä
     public StudentService(){
+        myStudentFileService= new StudentFileService();
         try {
             students = myStudentFileService.readStudentsFromFile();
         } catch (FileNotFoundException e) {
@@ -39,7 +40,7 @@ public class StudentService {
     public void addStudent(Students student) {
         students.add(student);
         try {
-            myStudentFileService.writeStudentsToFile(students, true);
+            myStudentFileService.writeStudentsToFile(students,true);
         } catch (IOException e) {
             e.printStackTrace();
         }
