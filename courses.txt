@@ -1,2 +1,4 @@
 Test Course10---Testi ---15
 Jahva---Jukka Jalonen---5
+Math---Jukka Jalonen---5
+English---Kaijja---5

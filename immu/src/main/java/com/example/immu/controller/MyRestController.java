@@ -2,7 +2,9 @@ package com.example.immu.controller;
 
 import com.example.immu.data.Courses;
 import com.example.immu.data.Students;
+import com.example.immu.data.StudentsOnCourses;
 import com.example.immu.service.CourseService;
+import com.example.immu.service.StudentOnCourseService;
 import com.example.immu.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,8 @@ public class MyRestController {
     StudentService myStudentService;
     @Autowired
     CourseService myCourseService;
+    @Autowired
+    StudentOnCourseService myStudentOnCourseService;
 
     //Luetaan kaikki opiskelijat
     @GetMapping("students")
@@ -55,6 +59,25 @@ public class MyRestController {
     public String addCourse(@RequestBody Courses course){
         myCourseService.addCourse(course);
         return "Kurssi lisätty";
+    }
+
+    //Luetaan kaikki opiskelijat kursseilta
+    @GetMapping("SOC")
+    public List<StudentsOnCourses> getStudentsOnCourse(){
+        return myStudentOnCourseService.getStudentsOnCourses();
+    }
+    //Lisätään opiskelija kurssille
+    @PostMapping("addSOC")
+    public String addStudentOnCourse(@RequestBody StudentsOnCourses studentsoncourse){
+        myStudentOnCourseService.addStudentOnCourse(studentsoncourse);
+        return "Lisätty";
+    }
+
+
+    //Hakee kurssit, joilla opiskelija on listoilla. Haku opiskellija ID:llä
+    @GetMapping("SOC/{id}")
+    public List<StudentsOnCourses> getSOCbyStudentId(@PathVariable int id){
+        return myStudentOnCourseService.getSOCbyStudentId(id);
     }
 
 }
