@@ -2,18 +2,18 @@ package com.example.immu.data;
 
 public class Courses {
     private String cName;
-    private int credits;
     private String teacher;
+    private int credits;
     private int CourseId;
 
     //Staattinen muuttuja uniikkia ID:tä varten
     private static int count = 0;
 
     //Alustin
-    public Courses(String cName, int credits, String teacher) {
+    public Courses(String cName, String teacher, int credits) {
         this.cName = cName;
-        this.credits = credits;
         this.teacher = teacher;
+        this.credits = credits;
         this.CourseId = count++;
     }
 
