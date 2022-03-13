@@ -47,6 +47,7 @@ public class Courses {
     public int getCourseId() {
         return CourseId;
     }
+
     //Getterit ja setterit loppuu
     //***
 }

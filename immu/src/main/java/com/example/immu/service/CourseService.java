@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class CourseService {
 
-    StudentFileService myStudentFileService;
+    FileService myFileService;
 
     private List<Courses> courses = new ArrayList<>();
 
@@ -19,9 +19,9 @@ public class CourseService {
 
     //Kun CourseService olio luodaan springiin, niin haetaan kurssi tiedot filestä
     public CourseService(){
-        myStudentFileService= new StudentFileService();
+        myFileService= new FileService();
         try {
-            courses = myStudentFileService.readCoursesFromFile();
+            courses = myFileService.readCoursesFromFile();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (NullPointerException f){
@@ -34,7 +34,7 @@ public class CourseService {
     public void addCourse(Courses course){
         courses.add(course);
         try {
-            myStudentFileService.writeCoursesToFile(courses,true);
+            myFileService.writeCoursesToFile(courses,true);
         } catch (IOException e) {
             e.printStackTrace();
         }
