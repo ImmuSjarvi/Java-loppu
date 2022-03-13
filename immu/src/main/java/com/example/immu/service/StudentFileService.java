@@ -2,6 +2,7 @@ package com.example.immu.service;
 
 import com.example.immu.data.Courses;
 import com.example.immu.data.Students;
+import com.example.immu.data.StudentsOnCourses;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -17,9 +18,9 @@ public class StudentFileService {
         FileWriter fw = new FileWriter( "students.txt");
 
         for (Students s: students) {
-            System.out.println("testi");
+            //System.out.println("testi");
             fw.write(s.getFname());
-            System.out.println(s.getFname());
+            //System.out.println(s.getFname());
             fw.write("---");
             fw.write(s.getLname());
             fw.write("---");
@@ -38,7 +39,7 @@ public class StudentFileService {
         while(sc.hasNextLine()) {
             String line = sc.nextLine();
             String[] info = line.split("---");
-            System.out.println(info[0]);
+            //System.out.println(info[0]);
             Students s = new Students(info[0], info[1], Integer.parseInt(info[2]));
             students.add(s);
         }
@@ -55,7 +56,7 @@ public class StudentFileService {
             fw1.write(c.getcName());
             fw1.write("---");
             fw1.write(c.getTeacher());
-            System.out.println(c.getCredits());
+            //System.out.println(c.getCredits());
             fw1.write("---");
             fw1.write(c.getCredits()+ System.lineSeparator());
         }
@@ -72,11 +73,39 @@ public class StudentFileService {
         while(sc.hasNextLine()) {
             String line = sc.nextLine();
             String[] info = line.split("---");
-            System.out.println(info[0]);
+            //System.out.println(info[0]);
             Courses c = new Courses(info[0], info[1], Integer.parseInt(info[2]));
             courses.add(c);
         }
         sc.close();
         return courses;
+    }
+
+    //Kirjotettaa tiedostoon kurssin ja studentin id:t
+    public void writeSOCToFile(List<StudentsOnCourses> SOC, boolean b) throws IOException {
+        FileWriter fw = new FileWriter( "studentsOnCourses.txt");
+
+        for (StudentsOnCourses soc: SOC) {
+            fw.write(String.valueOf(soc.getStudentId()));
+            fw.write("---");
+            fw.write(soc.getCourseId() + System.lineSeparator());
+        }
+        fw.close();
+    }
+
+    public List<StudentsOnCourses> readSOCFromFile() throws FileNotFoundException {
+        Scanner sc = new Scanner(new File("studentsOnCourses.txt"));
+        List<StudentsOnCourses> SOC = new ArrayList<>();
+
+
+        while(sc.hasNextLine()) {
+            String line = sc.nextLine();
+            String[] info = line.split("---");
+            //System.out.println(info[0]);
+            StudentsOnCourses soc = new StudentsOnCourses(Integer.parseInt(info[0]), Integer.parseInt(info[1]));
+            SOC.add(soc);
+        }
+        sc.close();
+        return SOC;
     }
 }

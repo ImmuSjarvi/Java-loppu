@@ -66,6 +66,7 @@ public class MyRestController {
     public List<StudentsOnCourses> getStudentsOnCourse(){
         return myStudentOnCourseService.getStudentsOnCourses();
     }
+
     //Lisätään opiskelija kurssille
     @PostMapping("addSOC")
     public String addStudentOnCourse(@RequestBody StudentsOnCourses studentsoncourse){
@@ -78,6 +79,12 @@ public class MyRestController {
     @GetMapping("SOC/{id}")
     public List<StudentsOnCourses> getSOCbyStudentId(@PathVariable int id){
         return myStudentOnCourseService.getSOCbyStudentId(id);
+    }
+
+    //Hakee opiskelijat, jotka on kurssilla. Haku kurssi ID:llä
+    @GetMapping("SOCC/{id}")
+    public List<StudentsOnCourses> getSOCbyCourseId(@PathVariable int id){
+        return myStudentOnCourseService.getSOCbyCourseId(id);
     }
 
 }
