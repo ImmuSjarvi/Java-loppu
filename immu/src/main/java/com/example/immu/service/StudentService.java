@@ -1,10 +1,8 @@
 package com.example.immu.service;
 
-import com.example.immu.data.Courses;
 import com.example.immu.data.Students;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,7 +13,7 @@ import java.util.List;
 public class StudentService {
 
     @Autowired
-    StudentFileService myStudentFileService;
+    FileService myFileService;
 
 
     private List<Students> students = new ArrayList<>();
@@ -25,9 +23,9 @@ public class StudentService {
 
     //Kun StudentService olio luodaan springiin, niin haetaan studentti tiedot filestä
     public StudentService(){
-        myStudentFileService= new StudentFileService();
+        myFileService= new FileService();
         try {
-            students = myStudentFileService.readStudentsFromFile();
+            students = myFileService.readStudentsFromFile();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (NullPointerException f){
@@ -40,7 +38,7 @@ public class StudentService {
     public void addStudent(Students student) {
         students.add(student);
         try {
-            myStudentFileService.writeStudentsToFile(students,true);
+            myFileService.writeStudentsToFile(students,true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -63,7 +61,6 @@ public class StudentService {
         }
         return foundStudent;
     }
-
 
 }
 

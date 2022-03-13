@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 @Service
-public class StudentFileService {
+public class FileService {
 
     //Kirjoitetaan luodut studentit tiedostoon
     public void writeStudentsToFile(List<Students> students, boolean b) throws IOException {
@@ -93,6 +93,7 @@ public class StudentFileService {
         fw.close();
     }
 
+    //Luetaan kurssin ja studentin ID:t tiedostosta
     public List<StudentsOnCourses> readSOCFromFile() throws FileNotFoundException {
         Scanner sc = new Scanner(new File("studentsOnCourses.txt"));
         List<StudentsOnCourses> SOC = new ArrayList<>();

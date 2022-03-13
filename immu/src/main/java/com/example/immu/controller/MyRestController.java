@@ -23,12 +23,13 @@ public class MyRestController {
     StudentOnCourseService myStudentOnCourseService;
 
     //Luetaan kaikki opiskelijat
+    //http://localhost:8080/students
     @GetMapping("students")
     public List<Students> getStudents(){
         return myStudentService.getStudents();
     }
 
-    //opiskelija Id:llä haku
+    //Opiskelijan haku Id:llä
     @GetMapping("students/{id}")
     public List<Students> getStudentById(@PathVariable int id){
         return myStudentService.getStudentById(id);
@@ -74,14 +75,13 @@ public class MyRestController {
         return "Lisätty";
     }
 
-
-    //Hakee kurssit, joilla opiskelija on listoilla. Haku opiskellija ID:llä
+    //Hakee kurssit, joilla opiskelija on listoilla. Haku opiskellijan ID:llä
     @GetMapping("SOC/{id}")
     public List<StudentsOnCourses> getSOCbyStudentId(@PathVariable int id){
         return myStudentOnCourseService.getSOCbyStudentId(id);
     }
 
-    //Hakee opiskelijat, jotka on kurssilla. Haku kurssi ID:llä
+    //Hakee opiskelijat, jotka on kurssilla. Haku kurssin ID:llä
     @GetMapping("SOCC/{id}")
     public List<StudentsOnCourses> getSOCbyCourseId(@PathVariable int id){
         return myStudentOnCourseService.getSOCbyCourseId(id);

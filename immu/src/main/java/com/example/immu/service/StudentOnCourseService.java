@@ -1,12 +1,9 @@
 package com.example.immu.service;
 
 
-import com.example.immu.data.Courses;
-import com.example.immu.data.Students;
 import com.example.immu.data.StudentsOnCourses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,16 +14,15 @@ import java.util.List;
 public class StudentOnCourseService {
 
     @Autowired
-    StudentFileService myStudentFileService = new StudentFileService();
+    FileService myFileService = new FileService();
 
     private List<StudentsOnCourses> SOC = new ArrayList<>();
 
 
     //Kun StudentOnCourseService olio luodaan springiin, niin haetaan kurssi tiedot filestä
     public StudentOnCourseService(){
-        //myStudentFileService= new StudentFileService();
         try {
-            SOC = myStudentFileService.readSOCFromFile();
+            SOC = myFileService.readSOCFromFile();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (NullPointerException f){
@@ -36,17 +32,17 @@ public class StudentOnCourseService {
     }
 
 
-    //Studenttin lisäys kurssille ja kirjotettaan filuun
+    //Studenttin lisäys kurssille ja kirjotettaan tiedostoon
     public void addStudentOnCourse(StudentsOnCourses studentsoncourse) {
             SOC.add(studentsoncourse);
         try {
-            myStudentFileService.writeSOCToFile(SOC,true);
+            myFileService.writeSOCToFile(SOC,true);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    //Palauttaa listan
+    //Palauttaa listan kursseilla olevista oppilaista
     public List<StudentsOnCourses> getStudentsOnCourses(){
         return new ArrayList<>(SOC);
     }

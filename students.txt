@@ -4,3 +4,5 @@ Testi---Kaali---55
 Testi---Kaali---5
 Testi---Kaa---53
 T---K---5
+Pekka---Pouta---55
+Pekko---Puuta---55
