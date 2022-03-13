@@ -30,7 +30,7 @@ public class CourseService {
         }
     }
 
-    //Kurssin lisäys listaan
+    //Kurssin lisäys listaan, kirjotetaan samalla tiedostoon
     public void addCourse(Courses course){
         courses.add(course);
         try {
